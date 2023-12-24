@@ -10,7 +10,7 @@ async function NavBar() {
       {session && (
         <div className="flex space-x-3">
           {/* TOOO: Find a better way to get first name only */}
-          <div>Welcome, {session.user?.name?.split(" ")[0]}</div>
+          <div>Welcome, {session.user?.name?.split(" ")[0]}!</div>
           <Link href="/event/myevents">My Events</Link>
           <div>
             <Link href="/api/auth/signout">Sign Out</Link>
