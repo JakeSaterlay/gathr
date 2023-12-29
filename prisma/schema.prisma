@@ -9,3 +9,17 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Event {
+  id         String       @id @default(cuid())
+  eventName  String
+  EventDates EventDates[]
+}
+
+model EventDates {
+  id        String   @id @default(cuid())
+  eventId   String
+  eventDate DateTime
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}

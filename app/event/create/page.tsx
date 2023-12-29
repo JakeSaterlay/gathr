@@ -1,8 +1,10 @@
+import EventForm from "./EventForm";
+
 const CreateEvent = () => {
   return (
     <div>
       <h1>Create an Event</h1>
-      <input placeholder="Event Name" />
+      <EventForm />
     </div>
   );
 };
