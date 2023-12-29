@@ -11,9 +11,10 @@ datasource db {
 }
 
 model Event {
-  id         String       @id @default(cuid())
-  eventName  String
-  EventDates EventDates[]
+  id             String       @id @default(cuid())
+  createdByEmail String
+  eventName      String
+  EventDates     EventDates[]
 }
 
 model EventDates {

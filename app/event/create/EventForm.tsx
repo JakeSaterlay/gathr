@@ -1,8 +1,8 @@
 "use client";
-
 import { FormEvent, useState } from "react";
-
+import { useRouter } from "next/navigation";
 const EventForm = () => {
+  const router = useRouter();
   const [eventName, setEventName] = useState("");
   const [eventDates, setEventDates] = useState<string[]>([]);
 
@@ -12,11 +12,12 @@ const EventForm = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(JSON.stringify({ eventName, eventDates }));
     fetch("/api/events", {
       method: "POST",
       body: JSON.stringify({ eventName, eventDates }),
     });
+    router.push("/event/myevents");
+    router.refresh();
   };
 
   return (
