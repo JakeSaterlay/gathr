@@ -1,45 +1,35 @@
-"use client";
-import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { getServerSession } from "next-auth";
+import DateInput from "./DateInput";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import prisma from "@/prisma/client";
+import { redirect } from "next/navigation";
+
 const EventForm = () => {
-  const router = useRouter();
-  const [eventName, setEventName] = useState("");
-  const [eventDates, setEventDates] = useState<string[]>([]);
+  async function createEvent(formData: FormData) {
+    "use server";
+    const eventName = formData.get("eventName") as string;
+    const eventDates = formData.getAll("date") as string[];
+    const session = await getServerSession(authOptions);
 
-  const handleEventDateAdd = (selectedDate: string) => {
-    setEventDates([...eventDates, selectedDate]);
-  };
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    fetch("/api/events", {
-      method: "POST",
-      body: JSON.stringify({ eventName, eventDates }),
+    const newEvent = await prisma.event.create({
+      data: {
+        eventName: eventName,
+        createdByEmail: session?.user?.email || "",
+      },
     });
-    router.push("/event/myevents");
-    router.refresh();
-  };
+
+    for (const date of eventDates) {
+      await prisma.eventDates.create({
+        data: { eventId: newEvent.id, eventDate: new Date(date) },
+      });
+    }
+    redirect("/event/myevents");
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="Event Name"
-        onChange={(e) => setEventName(e.target.value)}
-      />
-      <div>
-        <input
-          type="date"
-          onChange={(e) => handleEventDateAdd(e.target.value)}
-        />
-      </div>
-      <div>
-        <h1>Dates:</h1>
-        {eventDates.length > 0 ? (
-          eventDates.map((eventDate) => <div key={eventDate}>{eventDate}</div>)
-        ) : (
-          <div>No Dates Set</div>
-        )}
-      </div>
+    <form action={createEvent}>
+      <input placeholder="Event Name" name="eventName" />
+      <DateInput />
       <button type="submit">Add Event</button>
     </form>
   );
