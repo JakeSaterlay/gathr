@@ -10,6 +10,5 @@ export async function GET(
   });
   if (!events)
     return NextResponse.json({ error: "Events not found" }, { status: 404 });
-
   return NextResponse.json(events);
 }

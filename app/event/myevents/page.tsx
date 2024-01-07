@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 interface Event {
+  id: string;
   eventName: string;
 }
 
@@ -17,7 +18,9 @@ async function MyEvents() {
     <div>
       <h1 className="mb-5">My Events</h1>
       {events.length > 0 ? (
-        events.map((event) => <div>{event.eventName}</div>)
+        events.map((event) => (
+          <Link href={`/event/${event.id}`}>{event.eventName}</Link>
+        ))
       ) : (
         <div>No Events</div>
       )}
