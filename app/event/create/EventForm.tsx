@@ -28,9 +28,15 @@ const EventForm = () => {
 
   return (
     <form action={createEvent}>
-      <input placeholder="Event Name" name="eventName" />
+      <input
+        className="input input-bordered w-full max-w-xs"
+        placeholder="Event Name"
+        name="eventName"
+      />
       <DateInput />
-      <button type="submit">Add Event</button>
+      <button className="btn btn-primary" type="submit">
+        Add Event
+      </button>
     </form>
   );
 };
