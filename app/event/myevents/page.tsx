@@ -17,10 +17,10 @@ async function MyEvents() {
   return (
     <div>
       <h1 className="mb-5 text-lg">My Events</h1>
-      <div className="flex flex-wrap gap-1 mb-5">
+      <div className="mb-5">
         {events.length > 0 ? (
           events.map((event) => (
-            <div className="border-solid border-2 rounded border-slate-500 p-6 h-40 w-40">
+            <div className="bg-gray-100 drop-shadow-lg h-40 mb-5 p-6">
               <Link href={`/event/${event.id}`}>{event.eventName}</Link>
             </div>
           ))
