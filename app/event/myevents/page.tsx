@@ -16,14 +16,18 @@ async function MyEvents() {
   ).then((res) => res.json());
   return (
     <div>
-      <h1 className="mb-5">My Events</h1>
-      {events.length > 0 ? (
-        events.map((event) => (
-          <Link href={`/event/${event.id}`}>{event.eventName}</Link>
-        ))
-      ) : (
-        <div>No Events</div>
-      )}
+      <h1 className="mb-5 text-lg">My Events</h1>
+      <div className="flex flex-wrap gap-1 mb-5">
+        {events.length > 0 ? (
+          events.map((event) => (
+            <div className="border-solid border-2 rounded border-slate-500 p-6 h-40 w-40">
+              <Link href={`/event/${event.id}`}>{event.eventName}</Link>
+            </div>
+          ))
+        ) : (
+          <div>No Events</div>
+        )}
+      </div>
       <Link className="btn" href="/event/create">
         Create an Event
       </Link>
