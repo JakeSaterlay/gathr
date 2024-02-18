@@ -6,15 +6,21 @@ interface Props {
 
 async function getEvent(id: string) {
   const event = await prisma.event.findFirst({ where: { id: id } });
-  return event;
+  const dates = await prisma.eventDates.findMany({ where: { eventId: id } });
+  return { event, dates };
 }
 
 async function EventDetails({ params: { id } }: Props) {
-  const event = await getEvent(id);
+  const { event, dates } = await getEvent(id);
   return (
     <div>
       <div>Event id: {event?.id}</div>
       <div>Event Name: {event?.eventName}</div>
+      <div>
+        {dates.map((date) => (
+          <div>{date.eventDate.toDateString()}</div>
+        ))}
+      </div>
     </div>
   );
 }
