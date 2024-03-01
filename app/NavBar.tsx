@@ -12,9 +12,7 @@ async function NavBar() {
           {/* TOOO: Find a better way to get first name only */}
           <div>Welcome, {session.user?.name?.split(" ")[0]}</div>
           <Link href="/event/myevents">My Events</Link>
-          <div>
-            <Link href="/api/auth/signout">Sign Out</Link>
-          </div>
+          <Link href="/api/auth/signout">Sign Out</Link>
         </div>
       )}
       {!session && <Link href="/api/auth/signin">Login</Link>}
