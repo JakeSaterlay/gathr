@@ -16,13 +16,15 @@ async function MyEvents() {
   ).then((res) => res.json());
   return (
     <div>
-      <h1 className="mb-5 text-lg">My Events</h1>
+      <h1 className="mb-5 text-lg font-bold">My Events</h1>
       <div className="mb-5">
         {events.length > 0 ? (
           events.map((event) => (
-            <div className="bg-gray-100 drop-shadow-lg h-40 mb-5 p-6">
-              <Link href={`/event/${event.id}`}>{event.eventName}</Link>
-            </div>
+            <Link href={`/event/${event.id}`} key={event.id}>
+              <div className="bg-gray-100 drop-shadow-lg h-40 mb-5 p-6">
+                <p>{event.eventName}</p>
+              </div>
+            </Link>
           ))
         ) : (
           <div>No Events</div>
