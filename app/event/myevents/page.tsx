@@ -20,11 +20,16 @@ async function MyEvents() {
       <div className="mb-5">
         {events.length > 0 ? (
           events.map((event) => (
-            <Link href={`/event/${event.id}`} key={event.id}>
-              <div className="bg-gray-100 drop-shadow-lg h-40 mb-5 p-6">
-                <p>{event.eventName}</p>
+            <div
+              className="bg-gray-100 drop-shadow-lg h-40 mb-5 p-6 flex flex-col justify-between"
+              key={event.id}
+            >
+              <h1 className="text-lg">{event.eventName}</h1>
+              <div className="flex justify-end gap-2">
+                <Link href={`/event/${event.id}`}>Edit</Link>
+                <button>Delete</button>
               </div>
-            </Link>
+            </div>
           ))
         ) : (
           <div>No Events</div>
