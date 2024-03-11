@@ -5,6 +5,7 @@ import Link from "next/link";
 interface Event {
   id: string;
   eventName: string;
+  eventDescription: string;
 }
 
 export const revalidate = 0;
@@ -25,6 +26,7 @@ async function MyEvents() {
               key={event.id}
             >
               <h1 className="text-lg">{event.eventName}</h1>
+              <p>{event.eventDescription}</p>
               <div className="flex justify-end gap-2">
                 <Link href={`/event/${event.id}`}>Edit</Link>
                 <button>Delete</button>

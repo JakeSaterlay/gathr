@@ -16,6 +16,7 @@ async function EventDetails({ params: { id } }: Props) {
     <div>
       <div>Event id: {event?.id}</div>
       <div>Event Name: {event?.eventName}</div>
+      <div>Event Description: {event?.eventDescription}</div>
       <div>
         {dates.map((date) => (
           <div>{date.eventDate.toDateString()}</div>
