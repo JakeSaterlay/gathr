@@ -30,7 +30,7 @@ const EventForm = () => {
 
   return (
     <form action={createEvent}>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-2">
         <input
           className="input input-bordered max-w-xs"
           placeholder="Event Name"
@@ -41,11 +41,11 @@ const EventForm = () => {
           placeholder="Event description"
           name="eventDescription"
         />
+        <DateInput />
+        <button className="btn btn-primary w-32" type="submit">
+          Add Event
+        </button>
       </div>
-      <DateInput />
-      <button className="btn btn-primary" type="submit">
-        Add Event
-      </button>
     </form>
   );
 };
